@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Girlfriend Day</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: #ffb6c1;
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('Images/gambar123.jpg'); /* Ganti dengan gambar yang diinginkan */
+      background-size: cover;
+      background-position: center;
+      filter: blur(2px);
+      z-index: -2;
+    }
+
+    .container {
+      position: relative;
+      text-align: center;
+      width: 100%;
+      max-width: 600px;
+      z-index: 1;
+      margin-top: 20px;
+    }
+
+    .message-box {
+      display: none;
+      padding: 20px;
+      background-color: #000;
+      color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      font-size: 1.2em;
+      margin: 20px 0;
+    }
+
+    .reveal-btn {
+      padding: 15px 30px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+      margin-top: 20px;
+    }
+
+    .reveal-btn:active {
+      transform: scale(0.95);
+      background-color: #ff1493;
+    }
+
+    .reveal-btn:hover {
+      background-color: #ff1493;
+    }
+
+    .video-container {
+      display: none; /* Sembunyikan video awalnya */
+      margin-top: 20px;
+    }
+
+    video {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="container">
+    <div class="message-box" id="messageBox1">
+      <p>heeloow dedeeku, happy girlfriend daay yaa aku cuman mau bilang sesuatu...</p>
+      <img src="Images/foto1.jpg" alt="Foto Pacar 1" style="width: 150px; height: 150px; border-radius: 50%;">
+    </div>
+    <div class="message-box" id="messageBox2">
+      <p>makasii bngett dedee udaah selalu ada buat akuu dan selalu berusaha ngertiin aku...</p>
+      <img src="Images/foto2.jpg" alt="Foto Pacar 2" style="width: 150px; height: 150px; border-radius: 50%;">
+    </div>
+    <div class="message-box" id="messageBox3">
+      <p>dedee tau gaa?? kamuuu tuh segalanyaa aku bersyukur bangett bisa dapetinn perempuan kayak kmuu!...</p>
+      <img src="Images/foto3.jpg" alt="Foto Pacar 3" style="width: 150px; height: 150px; border-radius: 50%;">
+    </div>
+    <div class="message-box" id="messageBox4">
+      <p>jadii dedee makasiii sekali lagi udahh mau bertahan di hub ini aku harap kitaa sama samaa teruss!!. I love you! 💖</p>
+      <img src="Images/foto4.jpg" alt="Foto Pacar 4" style="width: 150px; height: 150px; border-radius: 50%;">
+    </div>
+
+    <button class="reveal-btn" onclick="playMusic()">Geser Dulu</button>
+
+    <div class="video-container" id="videoContainer">
+      <p>Jangan lupa ya Dede, tonton video ini!</p>
+      <video id="endingVideo" controls>
+        <source src="Videos/video123.mp4" type="video/mp4"> <!-- Ganti dengan nama file video -->
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="Music/musik123.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    let currentMessage = 0;
+    const messages = document.querySelectorAll('.message-box');
+    const bgMusic = document.getElementById('bgMusic');
+    const videoContainer = document.getElementById('videoContainer');
+    const endingVideo = document.getElementById('endingVideo');
+
+    function playMusic() {
+      bgMusic.play(); // Putar musik saat tombol diklik
+
+      if (currentMessage < messages.length) {
+        if (currentMessage > 0) {
+          messages[currentMessage - 1].style.display = 'none'; // Sembunyikan pesan sebelumnya
+        }
+        
+        messages[currentMessage].style.display = 'block'; // Tampilkan pesan saat ini
+        currentMessage++;
+
+        // Jika sudah menampilkan semua pesan, tampilkan video
+        if (currentMessage === messages.length) {
+          videoContainer.style.display = 'block'; // Tampilkan kontainer video
+          document.body.style.overflowY = 'auto'; // Izinkan scroll saat video ditampilkan
+        }
+      }
+    }
+
+    // Ketika video diputar, musik latar akan berhenti
+    endingVideo.addEventListener('play', function() {
+      bgMusic.pause(); // Hentikan musik saat video mulai diputar
+    });
+
+    // Ketika video dihentikan atau dijeda, musik latar diputar kembali
+    endingVideo.addEventListener('pause', function() {
+      bgMusic.play(); // Putar musik lagi saat video dijeda
+    });
+  </script>
+</body>
+</html>
